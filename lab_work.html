@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Intro to JavaScript</title>
+</head>
+<body>
+
+    <p>Enter some text to add to a list:</p>
+    <input id="new-text"></input> <!-- input text box -->
+    <button id="add-button">Add</button>
+    <button id="clear">Clear</button>
+
+    <ul id="list-of-text"></ul> <!-- Create an empty unordered list -->
+
+<script>
+    // these lines are for...?
+    let textInput = document.querySelector('#new-text')
+    let addButton = document.querySelector('#add-text')
+    let textList = document.querySelector('#list-of-text')
+    let clearButton = document.querySelector('#clear')
+
+    let itemsInList = 0 // this will track the items in the list
+    let maxItems = 10
+
+    addButton.addEventListener('click', function() {
+        let newText = textInput.value // read the text in the input
+
+        if (newText.length == 0) { // ignore if the user enters no text
+            alert('Enter some text')
+            return
+        }
+
+        if (itemsInList >= maxItems) { // Ensure the max number isn't exceeded
+            alert('You have hit the max items allowed')
+            return
+        }
+
+        if (newText.length > 50) { // don't allow to enter more than 50 characters
+            alert('The max is 50 characters!')
+            return
+        }
+
+        // next section of code allows user to add list items
+        let newListItem = document.createElement('li') // create a new li element
+        newListItem.innerHTML = newText // whatever text that is entered from the input will be the li element
+        textList.appendChild(newListItem) // add the new li element into the ul element
+        textInput.value = ''
+
+        itemsInList++
+    })
+
+    clearButton.addEventListener('click', function() {
+        textList.innerHTML = ''
+        itemsInList = 0 // when click, all li elements will be emptied
+    })
+
+</script>
+
+</body>
+</html>
