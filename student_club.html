@@ -46,40 +46,82 @@
     
 
     <ul id="student-list">
-        <!-- use JavaScript to create li elements  -->
+        
     </ul>
 
     <button id="remove-selected-students">Remove selected students</button>
 
 <script>
 
+    // creating variable for an element in the html
+    // all of the html is the 'document'
+    // 'querySelector' - go search in the document (html) for the input that matches
     let addButton = document.querySelector('#add-student')
     let studentNameInput = document.querySelector('#student-name')
     let studentIdInput = document.querySelector('#student-id')
     let studentGpaInput = document.querySelector('#student-gpa')
     let clearButton = document.querySelector('#clear')
+    let studentList = document.querySelector('#student-list')
+    let studentDisplay = document.querySelector('#student-count')
+    let removeButton = document.querySelector('#remove-selected-students')
+    
+    let studentsInList = 0 // tracks number of students in the list
+    studentDisplay.innerHTML = studentsInList
 
     addButton.addEventListener('click', function() {
         let studentName = studentNameInput.value //read the text in the student name input
         let studentGpa = studentGpaInput.value
         let studentId = studentIdInput.value
-        if (studentName == 0 | studentId == 0 | studentGpa == 0) {
-            alert('Enter missing data')
+        if (studentId.length == 0) { // if the input is empty, pop up an alert
+            alert('Enter the student ID')
+            return
+        }
+        if (studentName.length == 0) { // if the input is empty, pop up an alert
+            alert('Enter name')
+            return
+        }
+        if (studentGpa.length == 0) { // if the input is empty, pop up an alert
+            alert('Enter GPA')
+            return
+        }
+        if (studentGpa < 0 || studentGpa > 4) { // if the input is greater than 4 or less than 0, pop up an alert
+            alert('Enter positive GPA')
             return
         }
 
+
         let newListItem = document.createElement('li') // create a new li element
         newListItem.innerHTML = `${studentName}, id: ${studentId}, GPA ${studentGpa}`
+        studentList.appendChild(newListItem) // adds to the bottom of the form
+        studentNameInput.value = '' // clear the input
+        studentGpaInput.value = ''
+        studentIdInput.value = ''
+
+        studentsInList++
+        studentDisplay.innerHTML = studentsInList
+
+        newListItem.addEventListener('click', function() {
+            newListItem.classList.toggle("selected"); // change the selected class for one single element
+            // if you use classList, you don't need the . in front of the class
+        })      
     })
 
-    newListItem.addEventListener('click', function() {
-        class="selected"
-    })  
+    
+    removeButton.addEventListener('click', function() {
+        let studentsToDelete = document.querySelectorAll(".selected") // want to select all the elements with the class selected
+        studentsToDelete.forEach( function(element) {
+            element.remove()
+        })
+        // You have to add 'All' to querySelector if we're removing more than one element
+    })
 
-    function myFunction() {
-        let element = document.getElementById();
-        element.classList.toggle();
-    }
+
+
+
+
+    
+
+    
 
         
 
