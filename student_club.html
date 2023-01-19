@@ -53,6 +53,35 @@
 
 <script>
 
+    let addButton = document.querySelector('#add-student')
+    let studentNameInput = document.querySelector('#student-name')
+    let studentIdInput = document.querySelector('#student-id')
+    let studentGpaInput = document.querySelector('#student-gpa')
+    let clearButton = document.querySelector('#clear')
+
+    addButton.addEventListener('click', function() {
+        let studentName = studentNameInput.value //read the text in the student name input
+        let studentGpa = studentGpaInput.value
+        let studentId = studentIdInput.value
+        if (studentName == 0 | studentId == 0 | studentGpa == 0) {
+            alert('Enter missing data')
+            return
+        }
+
+        let newListItem = document.createElement('li') // create a new li element
+        newListItem.innerHTML = `${studentName}, id: ${studentId}, GPA ${studentGpa}`
+    })
+
+    newListItem.addEventListener('click', function() {
+        class="selected"
+    })  
+
+    function myFunction() {
+        let element = document.getElementById();
+        element.classList.toggle();
+    }
+
+        
 
 
     /* Add the following functionality to this page
